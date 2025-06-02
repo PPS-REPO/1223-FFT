@@ -6,7 +6,7 @@
 
 using namespace std;
 
-const double PI = acos(-1);
+const float PI = acos(-1);
 
 void FFT(vector<complex<float>>& X) {
     int n = X.size();
