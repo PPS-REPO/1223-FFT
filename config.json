@@ -32,7 +32,7 @@
     ],
     "generators": [
         {
-            "name": "generator",
+            "name": "generator.cc",
             "language": "cpp17",
             "alias": "random"
         }
