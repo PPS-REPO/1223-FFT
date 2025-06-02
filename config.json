@@ -9,12 +9,7 @@
     "limits": {
         "time": 1000,
         "memory": 536870912,
-        "factor": {
-            "py3": {
-                "time": 0,
-                "memory": 1073741824
-            }
-        }
+        "factor": {}
     },
     "enable_language": [],
     "statements": [
