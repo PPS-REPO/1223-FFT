@@ -22,7 +22,7 @@
         {
             "name": "solution_1.cc",
             "language": "cpp17",
-            "type": "AC"
+            "type": "MCS/AC"
         },
         {
             "name": "solution_2.cc",
