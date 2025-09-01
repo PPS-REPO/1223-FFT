@@ -5,6 +5,8 @@
     "checker_language": "cpp17",
     "validator": "validator.cc",
     "validator_language": "cpp11",
+    "interactor": "",
+    "interactor_language": "",
     "subtask": false,
     "limits": {
         "time": 1000,
@@ -47,8 +49,10 @@
             "only_deploy": false
         }
     ],
+    "manual_example": [],
     "versions": {
         "config": 1,
         "repository": 1
-    }
+    },
+    "deploy_uuid": ""
 }
