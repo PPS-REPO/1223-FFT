@@ -1,40 +1,62 @@
 #include "testlib.h"
 #include <cmath>
 #include <string>
+#include <vector>
+#include <algorithm>
 
 using namespace std;
 
-constexpr inline double MAX_ERROR = 1e-4;
+const double MAX_ERROR = 1e-4;
+
+bool areEqual(double expected, double found) {
+    if (std::isnan(expected) || std::isnan(found)) return false;
+    if (std::isinf(expected) || std::isinf(found)) return false;
+
+    double diff = std::abs(expected - found);
+
+    if (diff <= MAX_ERROR) return true;
+
+    double absExpected = std::abs(expected);
+    if (absExpected > 1e-9) {
+        if (diff / absExpected <= MAX_ERROR) return true;
+    }
+
+    return false;
+}
 
 int main(int argc, char* argv[]) {
+    setName("Compare FFT results (Real/Imag parts) with precision %.1e", MAX_ERROR);
     registerTestlibCmd(argc, argv);
 
-    int sample_rate = inf.readInt();
-    int buffer_size = inf.readInt();
-    
-    int total_lines = sample_rate;
-    
-    int floats_per_line = buffer_size * 2;
+    int n = 0;
 
-    for (int i = 0; i < total_lines; i++) {
-        for (int j = 0; j < floats_per_line; j++) {
-            double ja = ans.readDouble();
-            
-            double pa = ouf.readDouble();
+    while (!ans.seekEof()) {
+        n++;
 
-            if (!doubleCompare(pa, ja, MAX_ERROR)) {
-                quitf(_wa, 
-                    "Mismatch at line %d, value index %d: expected %.6f, found %.6f", 
-                    i + 1, j + 1, ja, pa);
-            }
+        double jReal = ans.readDouble();
+        double jImag = ans.readDouble();
+
+        if (ouf.seekEof()) {
+            quitf(_wa, "Output is shorter than expected. Missing complex number at index %d", n);
+        }
+
+        double pReal = ouf.readDouble();
+        double pImag = ouf.readDouble();
+
+        if (!areEqual(jReal, pReal)) {
+            quitf(_wa, "Real part mismatch at index %d: expected %.5f, found %.5f", n, jReal, pReal);
+        }
+
+        if (!areEqual(jImag, pImag)) {
+            quitf(_wa, "Imag part mismatch at index %d: expected %.5f, found %.5f", n, jImag, pImag);
         }
     }
 
     if (!ouf.seekEof()) {
-        quitf(_wa, "Participant output contains extra tokens (more data than expected).");
+        quitf(_wa, "Participant output has extra tokens after the last expected number.");
     }
 
-    quitf(_ok, "Parsed %d lines, all values within error range %.1e.", total_lines, MAX_ERROR);
+    quitf(_ok, "Accepted: %d complex numbers verified.", n);
 
     return 0;
 }
