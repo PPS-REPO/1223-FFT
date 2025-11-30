@@ -17,7 +17,7 @@ int main() {
     std::cout << (1<<BufferSize(gen)) << std::endl;
     for(int i = 0; i < SR; ++i)
         std::cout << Sample(gen) << (i+1 == SR ? "" : " ");
-    std::cout << std::flush;
+    std::cout << std::endl;
 
     return 0;
 }
