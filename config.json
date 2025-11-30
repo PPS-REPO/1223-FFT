@@ -4,7 +4,7 @@
     "checker": "checker",
     "checker_language": "cpp17",
     "validator": "validator.cc",
-    "validator_language": "cpp11",
+    "validator_language": "cpp17",
     "interactor": "",
     "interactor_language": "",
     "subtask": false,
