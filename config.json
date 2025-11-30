@@ -1,7 +1,7 @@
 {
     "problem_title": "FFT",
     "problem_type": "stdio",
-    "checker": "tcmp.cc",
+    "checker": "checker",
     "checker_language": "cpp17",
     "validator": "validator.cc",
     "validator_language": "cpp11",
