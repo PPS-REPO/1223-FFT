@@ -24,7 +24,7 @@
         {
             "name": "solve",
             "language": "cpp17",
-            "type": "MCS/AC"
+            "type": "MCS"
         }
     ],
     "generators": [
