@@ -1,0 +1,40 @@
+#include "testlib.h"
+#include <cmath>
+#include <string>
+
+using namespace std;
+
+constexpr inline double MAX_ERROR = 1e-4;
+
+int main(int argc, char* argv[]) {
+    registerTestlibCmd(argc, argv);
+
+    int sample_rate = inf.readInt();
+    int buffer_size = inf.readInt();
+    
+    int total_lines = sample_rate;
+    
+    int floats_per_line = buffer_size * 2;
+
+    for (int i = 0; i < total_lines; i++) {
+        for (int j = 0; j < floats_per_line; j++) {
+            double ja = ans.readDouble();
+            
+            double pa = ouf.readDouble();
+
+            if (!doubleCompare(pa, ja, MAX_ERROR)) {
+                quitf(_wa, 
+                    "Mismatch at line %d, value index %d: expected %.6f, found %.6f", 
+                    i + 1, j + 1, ja, pa);
+            }
+        }
+    }
+
+    if (!ouf.seekEof()) {
+        quitf(_wa, "Participant output contains extra tokens (more data than expected).");
+    }
+
+    quitf(_ok, "Parsed %d lines, all values within error range %.1e.", total_lines, MAX_ERROR);
+
+    return 0;
+}
