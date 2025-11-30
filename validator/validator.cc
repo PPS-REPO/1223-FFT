@@ -18,7 +18,7 @@ int main(int argc, char* argv[]) {
     for (int i = 0; i < numSamples; i++) {
         double sample = inf.readDouble(-1. 0, 1.0, "sample");
         
-        double rounded = round(sample * 10000. 0) / 10000.0;
+        double rounded = round(sample * 10000.0) / 10000.0;
         ensuref(fabs(sample - rounded) < 1e-9, 
                 "sample must have at most 4 decimal places");
         
