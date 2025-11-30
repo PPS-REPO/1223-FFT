@@ -20,7 +20,13 @@
             "label": "FFT"
         }
     ],
-    "solutions": [],
+    "solutions": [
+        {
+            "name": "solve",
+            "language": "cpp17",
+            "type": "MCS"
+        }
+    ],
     "generators": [
         {
             "name": "generator.cc",
