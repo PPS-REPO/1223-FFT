@@ -13,11 +13,11 @@ int main() {
     std::uniform_real_distribution<double> Sample(-1.0, 1.0);
 
     int SR = Samplerate(gen);
-    std::cout << SR << endl;
-    std::cout << (1<<BufferSize(gen)) << endl;
+    std::cout << SR << std::endl;
+    std::cout << (1<<BufferSize(gen)) << std::endl;
     for(int i = 0; i < SR; ++i)
         std::cout << Samplerate(gen) << (i+1 == SR ? '' : ' ');
-    std::cout << endl;
+    std::cout << std::flush;
 
     return 0;
 }
