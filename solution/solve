@@ -1,0 +1,64 @@
+#include <iostream>
+#include <vector>
+#include <complex>
+#include <cmath>
+#include <iomanip>
+
+using namespace std;
+
+const inline double PI = acos(-1.0);
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout << fixed << setprecision(4);
+
+    int Samplerate, BufferSize;
+    cin >> Samplerate >> BufferSize;
+
+    int TotalSamples = Samplerate;
+    vector<double> Samples(TotalSamples);
+
+    for(double& s : Samples) cin >> s;
+
+    int N = BufferSize;
+    vector<complex<double>> X(N, 0.0);
+
+    vector<complex<double>> twiddles(N);
+    for(size_t k = 0; k < N; ++k) {
+        const double angle = 2.0*PI*k/N;
+        twiddles[k] = polar(1.0, angle);
+    }
+
+    for(size_t k = 0; k < N; ++k) {
+        complex<double> sum(0, 0);
+        for (int n = 0; n < N; ++n) {
+            double val = n < TotalSamples ? Samples[n] : 0.0;
+            double angle = -2.0*PI*k*n/N;
+            sum += val*polar(1.0, angle);
+        }
+        X[k] = sum;
+    }
+
+    for(size_t i = 0; i < TotalSamples; ++i) {
+        for(size_t k = 0; k < N; ++k) {
+            cout << X[k].real() << ' ' << X[k].imag();
+            if(k < N-1) cout << ' ';
+        }
+        cout << "\n";
+
+        if(i == TotalSamples-1) break;
+        
+        double olds = Samples[i];
+        double news = 0.0;
+        if(i+N < TotalSamples) news = Samples[i+N];
+        double diff = news-olds;
+
+        for(size_t k = 0; k < N; ++k) {
+            X[k].real(X[k].real()+diff);
+            X[k] *= twiddles[k];
+        }
+    }
+
+    return 0;
+}
