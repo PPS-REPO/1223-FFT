@@ -9,7 +9,7 @@
     "interactor_language": "",
     "subtask": false,
     "limits": {
-        "time": 5000,
+        "time": 1000,
         "memory": 1073741824,
         "factor": {}
     },
