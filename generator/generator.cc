@@ -3,13 +3,20 @@
 #include <random>
 
 int main() {
+    ios_base::sync_with_stdio(false);
+    std::cout << std::fixed << std::setprecision(4);
+
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_real_distribution<float> dist(-1.0f, 1.0f);
+    std::uniform_real_distribution<int> Samplerate(1, 786000);
+    std::uniform_real_distribution<int> BufferSize(0, 10);
+    std::uniform_real_distribution<double> Sample(-1.0, 1.0);
 
-    std::cout << std::fixed << std::setprecision(4);
-    for (int i = 0; i < 256; ++i)
-        std::cout << dist(gen) << ' ';
+    int SR = Samplerate(gen);
+    std::cout << SR << endl;
+    std::cout << (1<<BufferSize(gen)) << endl;
+    for(int i = 0; i < SR; ++i)
+        std::cout << Samplerate(gen) << (i+1 == SR ? '' : ' ');
     std::cout << endl;
 
     return 0;
