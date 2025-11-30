@@ -1,6 +1,6 @@
 ## 문제
 
-Samplrate가 주어집니다. 단위는 ```Sample/ms```입니다.<br>
+Samplrate가 주어집니다. 단위는 ```Sample/sec```입니다.<br>
 BufferSize 주어집니다.<br>
 시간에 대한 파동의 진폭값이 주어집니다. 각 값들을 Sample이라고 부릅니다. 샘플의 개수는 ```1000ms*Samplrate```입니다.<br>
 <br>
